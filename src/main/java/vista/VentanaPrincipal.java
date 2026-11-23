@@ -15,19 +15,19 @@ public class VentanaPrincipal extends JFrame {
     public VentanaPrincipal() {
         setTitle("Banco Académico UDB | Sistema de Gestión Bancaria");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1120, 720);
-        setMinimumSize(new java.awt.Dimension(920, 620));
+        setSize(1180, 760);
+        setMinimumSize(new java.awt.Dimension(980, 650));
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
         JPanel encabezado = new JPanel(new BorderLayout());
         encabezado.setBackground(Estilos.AZUL);
-        encabezado.setBorder(javax.swing.BorderFactory.createEmptyBorder(20, 26, 20, 26));
+        encabezado.setBorder(javax.swing.BorderFactory.createEmptyBorder(18, 26, 18, 26));
 
         JLabel titulo = new JLabel("BANCO ACADÉMICO UDB");
         titulo.setForeground(Color.WHITE);
         titulo.setFont(new Font("SansSerif", Font.BOLD, 25));
-        JLabel subtitulo = new JLabel("Sistema de Gestión Bancaria | Fase 1");
+        JLabel subtitulo = new JLabel("Sistema de Gestión Bancaria | Fase 2");
         subtitulo.setForeground(new Color(220, 230, 242));
         subtitulo.setFont(new Font("SansSerif", Font.PLAIN, 13));
 
@@ -45,8 +45,10 @@ public class VentanaPrincipal extends JFrame {
 
         JTabbedPane pestanas = new JTabbedPane();
         pestanas.setFont(new Font("SansSerif", Font.BOLD, 13));
-        pestanas.addTab("  Gestión de clientes  ", new GestionClientes(clienteDAO));
-        pestanas.addTab("  Gestión de cuentas  ", new GestionCuentas(clienteDAO, cuentaDAO));
+        pestanas.addTab("Gestión de clientes", new GestionClientes(clienteDAO));
+        pestanas.addTab("Gestión de cuentas", new GestionCuentas(clienteDAO, cuentaDAO));
+        pestanas.addTab("Transacciones", new GestionTransacciones());
+        pestanas.addTab("Reportes", new GestionReportes());
         add(pestanas, BorderLayout.CENTER);
 
         JLabel pie = new JLabel("Universidad Don Bosco  |  POO901  |  Aplicación de escritorio",

@@ -6,9 +6,8 @@ import java.sql.SQLException;
 
 public class ConexionBD {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/sistema_bancario";
+    private static final String URL = "jdbc:mysql://localhost:3306/sistema_bancario_poo901";
     private static final String USUARIO = "root";
-    //Cambiar CLAVE por la contraseña de MySQL de cada computadora
     private static final String CLAVE = "";
 
     private ConexionBD() {

@@ -1,0 +1,49 @@
+2026-11-22 02:50:32.837 INFO  [principal.Main.main()] p.Main - Inicio de la aplicación Sistema de Gestión Bancaria Académica
+2026-11-22 02:50:49.163 ERROR [AWT-EventQueue-0] d.TransaccionDAO - Error SQL en la consulta del historial general: Access denied for user 'root'@'localhost' (using password: YES)
+java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:121)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:114)
+	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:840)
+	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:416)
+	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:237)
+	at com.mysql.cj.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:180)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:613)
+	at java.sql/java.sql.DriverManager.getConnection(DriverManager.java:199)
+	at conexion.ConexionBD.getConexion(ConexionBD.java:17)
+	at dao.TransaccionDAO.consultar(TransaccionDAO.java:214)
+	at dao.TransaccionDAO.listarHistorial(TransaccionDAO.java:56)
+	at vista.GestionTransacciones.cargarHistorial(GestionTransacciones.java:241)
+	at vista.GestionTransacciones.<init>(GestionTransacciones.java:90)
+	at vista.VentanaPrincipal.<init>(VentanaPrincipal.java:50)
+	at principal.Main.lambda$main$0(Main.java:24)
+	at java.desktop/java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:323)
+	at java.desktop/java.awt.EventQueue.dispatchEventImpl(EventQueue.java:714)
+	at java.desktop/java.awt.EventQueue.dispatchEvent(EventQueue.java:693)
+	at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.desktop/java.awt.EventDispatchThread.run(EventDispatchThread.java:90)
+2026-11-22 02:52:51.001 INFO  [principal.Main.main()] p.Main - Inicio de la aplicación Sistema de Gestión Bancaria Académica
+2026-11-22 02:52:51.783 INFO  [AWT-EventQueue-0] d.TransaccionDAO - Consulta del historial general: 6 movimiento(s)
+2026-11-22 02:59:17.902 WARN  [AWT-EventQueue-0] v.TransaccionService - DEPOSITO rechazado: cuenta=000006, monto=20.00, motivo=La cuenta 000006 no existe.
+2026-11-22 02:59:35.128 INFO  [AWT-EventQueue-0] d.TransaccionDAO - Commit del movimiento #7 (DEPOSITO): destino=CTA-000006, monto=20.00
+2026-11-22 02:59:35.129 INFO  [AWT-EventQueue-0] v.TransaccionService - DEPOSITO exitoso: cuenta=CTA-000006, monto=20.00
+2026-11-22 02:59:37.668 INFO  [AWT-EventQueue-0] d.TransaccionDAO - Consulta del historial general: 7 movimiento(s)
+2026-11-22 03:00:04.983 INFO  [AWT-EventQueue-0] d.TransaccionDAO - Commit del movimiento #8 (RETIRO): origen=CTA-000006, monto=10.00
+2026-11-22 03:00:04.990 INFO  [AWT-EventQueue-0] v.TransaccionService - RETIRO exitoso: cuenta=CTA-000006, monto=10.00
+2026-11-22 03:00:07.027 INFO  [AWT-EventQueue-0] d.TransaccionDAO - Consulta del historial general: 8 movimiento(s)
+2026-11-22 03:00:30.809 INFO  [AWT-EventQueue-0] d.ReporteDAO - Reporte de cuentas en estado ACTIVA: 5 registro(s)
+2026-11-22 03:02:20.486 INFO  [principal.Main.main()] p.Main - Inicio de la aplicación Sistema de Gestión Bancaria Académica
+2026-11-22 03:02:21.417 INFO  [AWT-EventQueue-0] d.TransaccionDAO - Consulta del historial general: 8 movimiento(s)
+2026-11-22 03:03:21.033 INFO  [AWT-EventQueue-0] d.TransaccionDAO - Commit del movimiento #9 (DEPOSITO): destino=CTA-000006, monto=15.00
+2026-11-22 03:03:21.037 INFO  [AWT-EventQueue-0] v.TransaccionService - DEPOSITO exitoso: cuenta=CTA-000006, monto=15.00
+2026-11-22 03:03:49.583 INFO  [AWT-EventQueue-0] d.TransaccionDAO - Consulta del historial general: 9 movimiento(s)
+2026-11-22 03:04:05.774 INFO  [AWT-EventQueue-0] d.TransaccionDAO - Commit del movimiento #10 (RETIRO): origen=CTA-000006, monto=5.00
+2026-11-22 03:04:05.777 INFO  [AWT-EventQueue-0] v.TransaccionService - RETIRO exitoso: cuenta=CTA-000006, monto=5.00
+2026-11-22 03:04:33.781 INFO  [AWT-EventQueue-0] d.TransaccionDAO - Consulta del historial general: 10 movimiento(s)
+2026-11-22 03:05:06.191 INFO  [AWT-EventQueue-0] d.TransaccionDAO - Commit del movimiento #11 (TRANSFERENCIA): origen=CTA-000006, destino=CTA-000002, monto=15.00
+2026-11-22 03:05:06.192 INFO  [AWT-EventQueue-0] v.TransaccionService - TRANSFERENCIA exitosa: origen=CTA-000006, destino=CTA-000002, monto=15.00
+2026-11-22 03:05:33.115 INFO  [AWT-EventQueue-0] d.TransaccionDAO - Consulta del historial general: 11 movimiento(s)
+2026-11-22 03:06:29.162 INFO  [AWT-EventQueue-0] d.ReporteDAO - Reporte de cuentas en estado ACTIVA: 5 registro(s)

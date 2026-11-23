@@ -1,0 +1,28 @@
+ID;Operación;Escenario;Datos o precondición;Resultado esperado;Nivel de log esperado
+CP-01;Depósito;Depósito correcto;Cuenta existente y activa, monto mayor que cero;El saldo aumenta por el monto y el movimiento queda registrado;INFO
+CP-02;Depósito;Cuenta inexistente;Número de cuenta no registrado;Se rechaza, no cambia ningún saldo y se informa la excepción de cuenta no encontrada;WARN
+CP-03;Depósito;Cuenta inactiva;Cuenta existente en estado INACTIVA;Se rechaza y el saldo permanece igual;WARN
+CP-04;Depósito;Cuenta bloqueada;Cuenta existente en estado BLOQUEADA;Se rechaza y el saldo permanece igual;WARN
+CP-05;Depósito;Monto cero;Cuenta activa, monto igual a cero;Se rechaza por monto inválido y no se registra movimiento;WARN
+CP-06;Depósito;Monto negativo;Cuenta activa, monto menor que cero;Se rechaza por monto inválido y no se registra movimiento;WARN
+CP-07;Retiro;Retiro correcto;Cuenta existente y activa, saldo suficiente, monto positivo;El saldo disminuye por el monto y el movimiento queda registrado;INFO
+CP-08;Retiro;Saldo insuficiente;Cuenta activa, monto positivo superior al saldo;Se rechaza, saldo sin cambios y se informa saldo insuficiente;WARN
+CP-09;Retiro;Cuenta inexistente;Número de cuenta no registrado;Se rechaza, no se registra movimiento;WARN
+CP-10;Retiro;Cuenta no activa;Cuenta existente INACTIVA o BLOQUEADA;Se rechaza, saldo sin cambios;WARN
+CP-11;Retiro;Monto no válido;Monto igual o menor que cero;Se rechaza por monto inválido, saldo sin cambios;WARN
+CP-12;Transferencia;Transferencia correcta;Origen y destino existentes y activos, origen con fondos, monto positivo;Se descuenta origen, se abona destino y queda registrado el movimiento;INFO
+CP-13;Transferencia;Origen inexistente;Origen no registrado;Se rechaza y ninguna cuenta cambia;WARN
+CP-14;Transferencia;Destino inexistente;Destino no registrado;Se rechaza y ninguna cuenta cambia;WARN
+CP-15;Transferencia;Origen no activo;Origen INACTIVA o BLOQUEADA;Se rechaza y ninguna cuenta cambia;WARN
+CP-16;Transferencia;Destino no activo;Destino INACTIVA o BLOQUEADA;Se rechaza y ninguna cuenta cambia;WARN
+CP-17;Transferencia;Fondos insuficientes;Origen activo con saldo inferior al monto;Se rechaza y ambas cuentas conservan sus saldos;WARN
+CP-18;Transferencia;Monto no válido;Monto igual o menor que cero;Se rechaza y ambas cuentas conservan sus saldos;WARN
+CP-19;Transferencia;Fallo al aplicar una de las actualizaciones;Simular error de persistencia después de iniciar la operación;La transacción JDBC hace rollback y quedan intactos ambos saldos;ERROR
+CP-20;Consulta;Movimiento inexistente;ID de movimiento no registrado;La aplicación informa que no se encontró el movimiento;INFO
+CP-21;Consulta;Historial de cuenta;Cuenta con varios movimientos;Se muestran solo los movimientos relacionados con la cuenta seleccionada;INFO
+CP-22;Reportes;Cuentas activas;Base con cuentas de distintos estados;El reporte contiene únicamente cuentas activas;INFO
+CP-23;Reportes;Cuentas bloqueadas;Base con cuentas de distintos estados;El reporte contiene únicamente cuentas bloqueadas;INFO
+CP-24;Reportes;Clientes registrados;Base con clientes registrados;Se muestra el listado de clientes según el alcance acordado;INFO
+CP-25;Reportes;Historial general;Base con depósitos, retiros y transferencias;Se muestran movimientos registrados con sus datos acordados;INFO
+CP-26;Reportes;Movimientos por cuenta;Cuenta con movimientos y cuenta sin movimientos;El listado corresponde a la cuenta consultada y el caso vacío se muestra claramente;INFO
+CP-27;Reportes;Totales por operación;Base con movimientos de los tres tipos;Totales depositado, retirado y transferido coinciden con el historial;INFO

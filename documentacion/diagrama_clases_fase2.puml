@@ -1,0 +1,120 @@
+@startuml
+ title POO901 - Sistema de Gestión Bancaria Académica (Fase 2)
+ skinparam classAttributeIconSize 0
+
+ package "modelo" {
+   class Cliente {
+     - duiCliente: String
+     - nombreCompletoCliente: String
+     - correoCliente: String
+     - direccionCliente: String
+     - estadoCliente: EstadoCliente
+     - telefonos: List<String>
+   }
+   class Cuenta {
+     - numeroCuenta: String
+     - duiCliente: String
+     - tipoCuenta: TipoCuenta
+     - saldo: BigDecimal
+     - fechaApertura: LocalDate
+     - estadoCuenta: EstadoCuenta
+   }
+   class Transaccion {
+     - idTransaccion: long
+     - tipoTransaccion: TipoTransaccion
+     - monto: BigDecimal
+     - fechaHora: LocalDateTime
+     - numeroCuentaOrigen: String
+     - numeroCuentaDestino: String
+     - descripcion: String
+   }
+   enum TipoTransaccion {
+     DEPOSITO
+     RETIRO
+     TRANSFERENCIA
+   }
+ }
+ package "excepciones" {
+   class CuentaNoEncontradaException
+   class CuentaInactivaException
+   class SaldoInsuficienteException
+   class MontoInvalidoException
+ }
+ package "validaciones" {
+   class TransaccionService {
+     + depositar(numeroCuenta, monto): Transaccion
+     + retirar(numeroCuenta, monto): Transaccion
+     + transferir(origen, destino, monto): Transaccion
+     + validarCuentaActiva(cuenta): void
+     + validarMonto(monto): void
+     + validarSaldo(cuenta, monto): void
+   }
+ }
+ package "conexion" { class ConexionBD }
+ package "dao" {
+   class ClienteDAO
+   class CuentaDAO
+   class TransaccionDAO {
+     + registrarDeposito(transaccion): void
+     + registrarRetiro(transaccion): void
+     + registrarTransferencia(transaccion): void
+     + buscarPorId(id): Transaccion
+     + listarHistorial(): List<Transaccion>
+     + listarHistorialPorCuenta(numeroCuenta): List<Transaccion>
+   }
+   class ReporteDAO {
+     + cuentasActivas(): List<Cuenta>
+     + cuentasBloqueadas(): List<Cuenta>
+     + clientesRegistrados(): List<Cliente>
+     + historial(): List<Transaccion>
+     + transaccionesPorCuenta(numeroCuenta): List<Transaccion>
+     + totalPorTipo(tipo): BigDecimal
+     + totalDepositado(): BigDecimal
+     + totalRetirado(): BigDecimal
+     + totalTransferido(): BigDecimal
+   }
+ }
+ package "vista" {
+   class VentanaPrincipal
+   class GestionClientes
+   class GestionCuentas
+   class GestionTransacciones
+   class GestionReportes
+ }
+ package "principal" { class Main }
+ Cliente "1" -- "0..*" Cuenta : posee
+ Cuenta "1" -- "0..*" Transaccion : participa
+ TransaccionService ..> CuentaDAO : consulta cuenta
+ TransaccionService ..> TransaccionDAO : registra operación
+ TransaccionService ..> Cuenta : verifica estado y saldo
+ TransaccionService ..> Transaccion : crea
+ TransaccionService ..> CuentaNoEncontradaException
+ TransaccionService ..> CuentaInactivaException
+ TransaccionService ..> SaldoInsuficienteException
+ TransaccionService ..> MontoInvalidoException
+ TransaccionDAO ..> Transaccion
+ ReporteDAO ..> Cuenta
+ ReporteDAO ..> Cliente
+ ReporteDAO ..> Transaccion
+ ReporteDAO ..> ClienteDAO : reutiliza
+ ReporteDAO ..> TransaccionDAO : reutiliza
+ ClienteDAO ..> ConexionBD
+ CuentaDAO ..> ConexionBD
+ TransaccionDAO ..> ConexionBD
+ ReporteDAO ..> ConexionBD
+ GestionClientes ..> ClienteDAO
+ GestionCuentas ..> ClienteDAO
+ GestionCuentas ..> CuentaDAO
+ GestionTransacciones ..> TransaccionService
+ GestionTransacciones ..> TransaccionDAO : consulta
+ GestionReportes ..> ReporteDAO
+ VentanaPrincipal o-- GestionClientes
+ VentanaPrincipal o-- GestionCuentas
+ VentanaPrincipal o-- GestionTransacciones
+ VentanaPrincipal o-- GestionReportes
+ Main ..> VentanaPrincipal
+ note right of Transaccion
+  Propuesta para coordinar con Integrantes 2 y 3.
+  Ajustar los campos si el esquema SQL final cambia.
+ end note
+@enduml
